@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatelessWidget {
-  static String id = 'chat_screen';
+  static const String id = 'chat_screen';
 
   const ChatScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Text('Chat Screen'),
+    );
   }
 }

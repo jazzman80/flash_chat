@@ -4,7 +4,9 @@ import 'screens/chat_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/registration_screen.dart';
 
-void main() => const FlashChatApp();
+void main() => runApp(
+      const FlashChatApp(),
+    );
 
 class FlashChatApp extends StatelessWidget {
   const FlashChatApp({Key? key}) : super(key: key);
