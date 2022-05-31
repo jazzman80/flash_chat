@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'user_form.dart';
 
 class RegistrationScreen extends StatelessWidget {
   static const String id = 'registration_screen';
@@ -7,8 +8,16 @@ class RegistrationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('Registration Screen'),
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 0.0,
+            horizontal: 50.0,
+          ),
+          child: userForm(buttonLabel: 'Register'),
+        ),
+      ),
     );
   }
 }

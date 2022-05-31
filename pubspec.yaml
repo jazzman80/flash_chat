@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
+  animated_text_kit: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -20,5 +21,7 @@ dev_dependencies:
   flutter_lints: ^1.0.0
 
 flutter:
+  assets:
+    - images/
 
   uses-material-design: true
