@@ -40,26 +40,25 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Hero(
-                  tag: 'logo',
-                  child: Container(
-                    height: 50.0,
-                    child: Image.asset(
-                      'images/logo.png',
-                    ),
-                  ),
+            Hero(
+              tag: 'logo',
+              child: Container(
+                height: 50.0,
+                child: Image.asset(
+                  'images/logo.png',
                 ),
-                FadeTransition(
-                  opacity: _opacityAnimation,
-                  child: Text(
-                    'Flash Chat',
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                ),
-              ],
+              ),
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            FadeTransition(
+              opacity: _opacityAnimation,
+              child: Text(
+                'Flash Chat',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
             ),
             SizedBox(
               height: 40.0,
