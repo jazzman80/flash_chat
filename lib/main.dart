@@ -5,6 +5,8 @@ import 'screens/login_screen.dart';
 import 'screens/registration_screen.dart';
 import 'theme.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() => runApp(
       DevicePreview(
@@ -13,8 +15,25 @@ void main() => runApp(
       ),
     );
 
-class FlashChatApp extends StatelessWidget {
+class FlashChatApp extends StatefulWidget {
   const FlashChatApp({Key? key}) : super(key: key);
+
+  @override
+  State<FlashChatApp> createState() => _FlashChatAppState();
+}
+
+class _FlashChatAppState extends State<FlashChatApp> {
+  void initFirebase() async {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initFirebase();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +47,7 @@ class FlashChatApp extends StatelessWidget {
         WelcomeScreen.id: (context) => const WelcomeScreen(),
         ChatScreen.id: (context) => const ChatScreen(),
         LoginScreen.id: (context) => const LoginScreen(),
-        RegistrationScreen.id: (context) => const RegistrationScreen(),
+        RegistrationScreen.id: (context) => RegistrationScreen(),
       },
       theme: appThemeData(context),
     );
