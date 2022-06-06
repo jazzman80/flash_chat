@@ -30,6 +30,15 @@ class _ChatScreenState extends State<ChatScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Chat'),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.close),
+              onPressed: () async {
+                await _auth.signOut();
+                Navigator.pop(context);
+              },
+            ),
+          ],
         ),
       ),
     );
