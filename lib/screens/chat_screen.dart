@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 
 class ChatScreen extends StatefulWidget {
   static const String id = 'chat_screen';
@@ -12,6 +14,9 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+  String _message = '';
+  final TextEditingController _textController = TextEditingController();
 
   void getCurrentUser() {
     final currentUser = _auth.currentUser;
@@ -39,6 +44,47 @@ class _ChatScreenState extends State<ChatScreen> {
               },
             ),
           ],
+        ),
+        bottomNavigationBar: BottomAppBar(
+          color: Theme.of(context).colorScheme.primary,
+          child: Container(
+            padding: EdgeInsets.all(15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _textController,
+                    strutStyle: StrutStyle(),
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    if (_textController.text != '') {
+                      _firestore.collection('messages').add(
+                        {
+                          'text': _textController.text,
+                          'sender': _auth.currentUser?.email,
+                        },
+                      );
+                    }
+                    setState(() {
+                      _textController.text = '';
+                    });
+                  },
+                  child: Text(
+                    'Send',
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
