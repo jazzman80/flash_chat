@@ -45,6 +45,22 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ],
         ),
+        body: StreamBuilder<QuerySnapshot>(
+          stream: _firestore.collection('messages').snapshots(),
+          builder: (context, snapshot) {
+            List<Widget> messages = [];
+            if (snapshot.hasData) {
+              for (var message in snapshot.data!.docs) {
+                Widget newMessage =
+                    Text('${message['sender']} : ${message['text']}');
+                messages.add(newMessage);
+              }
+            }
+            return Column(
+              children: messages,
+            );
+          },
+        ),
         bottomNavigationBar: BottomAppBar(
           color: Theme.of(context).colorScheme.primary,
           child: Container(
@@ -55,7 +71,6 @@ class _ChatScreenState extends State<ChatScreen> {
                 Expanded(
                   child: TextField(
                     controller: _textController,
-                    strutStyle: StrutStyle(),
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Theme.of(context).colorScheme.onPrimary,
