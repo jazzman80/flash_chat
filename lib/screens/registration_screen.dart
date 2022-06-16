@@ -2,6 +2,7 @@ import 'package:flash_chat/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const String id = 'registration_screen';
@@ -74,6 +75,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       UserCredential newUser =
                           await _auth.createUserWithEmailAndPassword(
                               email: email, password: password);
+                      final prefs = await SharedPreferences.getInstance();
+                      await prefs.setString('email', email);
+                      await prefs.setString('password', password);
                       setState(() {
                         _showSpinner = false;
                       });
